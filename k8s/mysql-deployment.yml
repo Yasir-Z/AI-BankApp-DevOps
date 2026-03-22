@@ -20,3 +20,14 @@ spec:
         image: mysql:8.0
         ports:
         - containerPort: 3306
+        env:
+          - name: MYSQL_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: bankapp-config-map
+                key: MYSQL_DATABASE
+          - name: MYSQL_ROOT_PASSWORD 
+            valueFrom:
+              secretKeyRef:
+                name: bankapp-secret
+                key: MYSQL_ROOT_PASSWORD              
