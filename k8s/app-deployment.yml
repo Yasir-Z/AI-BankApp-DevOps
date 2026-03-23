@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bankapp-deployment
+  namespace: bankapp
+  labels:
+    app: bankapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bankapp
+  template:
+    metadata:
+      labels:
+        app: bankapp
+    spec:
+      containers:
+      - name: bankapp
+        image: trainwithshubham/ai-bankapp:latest
+        ports:
+        - containerPort: 8080
+        env:
+          MYSQL_HOST: mysql
+          MYSQL_PORT: 3306
+          MYSQL_DATABASE: bankappdb
+          MYSQL_USER: root
+          MYSQL_PASSWORD: Test@123
+          OLLAMA_URL: http://ollama:11434
